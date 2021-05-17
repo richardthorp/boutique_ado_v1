@@ -36,7 +36,6 @@ def bag_contents(request):
         'total': total,
         'product_count': product_count,
         'delivery': delivery,
-        'total': total,
         'free-delivery_delta': free_delivery_delta,
         'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
         'grand_total': grand_total
