@@ -1,0 +1,44 @@
+<script type="text/javascript">
+
+    // Disable +/- buttons outside 1-99 range
+    function handleEnableDisable(itemId){
+        let currentVal = parseInt($(`#id_qty_${itemId}`).val());
+        let minusDisabled = currentVal < 2;
+        let plusDisabled = currentVal > 98;
+        $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+        $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+    }
+
+    // Ensure decrement btn disabled on page load (with input on val == 1)
+    let allQtyInputs = $(".qty_input");
+    for (let i = 0; i < allQtyInputs.length; i++){
+        inputId = $(allQtyInputs[i]).data("item_id");
+        handleEnableDisable(inputId)
+    }
+
+    // Check enable/disable every time the input is changed
+    $(".qty_input").change(function(){
+        let itemId = (this).data('item_id');
+        handleEnableDisable(itemId)
+    })
+
+    // Increment quantity
+    $(".increment-qty").click(function(event){
+        event.preventDefault();
+        let closestInput = $(this).closest(".input-group").find(".qty_input")[0];
+        let currentVal = parseInt($(closestInput).val());
+        $(closestInput).val(currentVal + 1)
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId)
+    });
+
+    // Decrement quantity
+    $(".decrement-qty").click(function(event){
+        event.preventDefault();
+        let closestInput = $(this).closest(".input-group").find(".qty_input")[0];
+        let currentVal = parseInt($(closestInput).val());
+        $(closestInput).val(currentVal - 1)
+        let itemId = $(this).data('item_id');
+        handleEnableDisable(itemId)
+    });
+</script>
