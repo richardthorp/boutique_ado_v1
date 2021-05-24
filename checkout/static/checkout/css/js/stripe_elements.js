@@ -46,6 +46,8 @@ form.addEventListener('submit', function (ev) {
     // Block user from clicking submit multiple times or using card element after a submit
     card.update({'disabled': true });
     $("#submit-button").attr('disabled', true);
+    $("#payment-form").fadeToggle(100)
+    $("#loading-overlay").fadeToggle(100)
     // If the client secret was rendered server-side as a data-secret attribute
     // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
     stripe.confirmCardPayment(clientSecret, {
@@ -62,6 +64,8 @@ form.addEventListener('submit', function (ev) {
             </span>
             <span>${result.error.message}</span>`
 
+            $("#payment-form").fadeToggle(100)
+            $("#loading-overlay").fadeToggle(100)
             var errorDiv = document.getElementById('card-errors');
             $(errorDiv).html(html);
 
