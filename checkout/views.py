@@ -22,7 +22,7 @@ def cache_checkout_data(request):
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag')),
             'save_info': request.POST.get('save_info'),
-            'username': request.user, 
+            'username': request.user,
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -34,7 +34,6 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
@@ -113,7 +112,6 @@ def checkout(request):
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
                     'email': profile.user.email,
-                    'phone_number': profile.default_phone_number,
                     'phone_number': profile.default_phone_number,
                     'street_address1': profile.default_street_address1,
                     'street_address2': profile.default_street_address2,

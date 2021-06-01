@@ -55,7 +55,7 @@ form.addEventListener('submit', function (ev) {
 
     // Gather data for cache_checkout_data view and send before submitting
     // confirmCardPayment() to stripe
-    var saveInfo = Boolean($("id-save-info").attr('checked'));
+    var saveInfo = Boolean($("#id-save-info").attr('checked'));
     var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
@@ -116,7 +116,7 @@ form.addEventListener('submit', function (ev) {
             } else {
                 // The payment has been processed!
                 if (result.paymentIntent.status === 'succeeded') {
-                    form.submit()
+                   form.submit()
                 }
             }
         });
